@@ -1,19 +1,41 @@
-#include <QCoreApplication>
-
-int main(int argc, char *argv[])
+int main()
 {
-    QCoreApplication a(argc, argv);
+    const int szz = 10;
+    int array[szz] = {5,5,7,3,3,2,2,1,1,10};
+    int max = array[0];
+    for(int i=1;i < szz;i++)
+        if(array[i] > max) max = array[i];
+    bool unique = true;
+    int notExist = max+1;
+    int countEl=0;
+    for(int i=0;i < szz;i++)
+    {
+        int jx = i+1;
+        if(array[i]!= notExist)
+        {
+            unique = true;
+            while(jx < szz)
+            {
+                if(array[jx]!= notExist)
+                {
+                    if(array[i] == array[jx])
+                    {
+                        array[jx] = notExist;
 
-    // Set up code that uses the Qt event loop here.
-    // Call a.quit() or a.exit() to quit the application.
-    // A not very useful example would be including
-    // #include <QTimer>
-    // near the top of the file and calling
-    // QTimer::singleShot(5000, &a, &QCoreApplication::quit);
-    // which quits the application after 5 seconds.
+                    }
+             s   }
+                jx++;
+            }
+        }
+        else
+            unique = false;
+        if(unique)
+            countEl++;
+        else
+            array[i] = notExist;
+    }
 
-    // If you do not need a running Qt event loop, remove the call
-    // to a.exec() or use the Non-Qt Plain C++ Application template.
-
-    return a.exec();
+    printf("countEl = %d", countEl);
 }
+
+
